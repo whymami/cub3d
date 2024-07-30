@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:25:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/07/30 16:24:56 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/07/30 20:02:16 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@
 
 typedef struct s_map
 {
-	char		**game_map;
-	int			map_width;
-	int			map_height;
+	char		**map;
+	char		**map_copy;
+	char		**map_data;
+	int			width;
+	int			height;
 }				t_map;
 
 typedef struct s_player
@@ -50,5 +52,6 @@ void			ft_exit(int err_no, char *err, t_game *game);
 void			map_path_control(char *path);
 void			get_map_size(char *path);
 int				ft_len_not_nl(char *str);
+char			**my_realloc_arr(char **ptr, size_t size);
 
 #endif
