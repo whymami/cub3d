@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:25:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/07/30 20:02:16 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/08/04 19:37:00 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,21 @@
 # define _SUCC_EXIT 0
 # define _FINISH_GAME 1
 
+typedef struct s_mapdata
+{
+	char		**data;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	char		*ceiling;
+	char		*floor;
+}				t_mapdata;
 typedef struct s_map
 {
 	char		**map;
 	char		**map_copy;
-	char		**map_data;
+	t_mapdata	*data;
 	int			width;
 	int			height;
 }				t_map;
@@ -53,5 +63,6 @@ void			map_path_control(char *path);
 void			get_map_size(char *path);
 int				ft_len_not_nl(char *str);
 char			**my_realloc_arr(char **ptr, size_t size);
+void	free_map(char **map, int y);
 
 #endif
