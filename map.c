@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:15:33 by muguveli          #+#    #+#             */
-/*   Updated: 2024/08/09 19:07:05 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/08/09 21:30:31 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,41 @@ void	player_dir(t_game *game, int x, int y, char dir)
 		ft_exit(1, "Multiple player directions", game);
 }
 
+void	pass_space(char *str, int *i)
+{
+	while ((str[*i] >= 9 && str[*i] <= 13) || str[*i] == SPACE)
+		(*i)++;
+}
+
+void	frame_control(t_game *game)
+{
+	int	y;
+	int	x;
+
+	y = -1;
+	while (++y < game->map->height - 8)
+	{
+		x = 0;
+		pass_space(game->map->map[y], &x);
+		if (((game->map->map[y][x] != WALL)
+				|| (game->map->map[y][ft_len_not_nl(game->map->map[y])
+					- 1]) != WALL))
+			ft_exit(1, "Map is not closed", game);
+		while (game->map->map[y][x])
+		{
+			if (game->map->map[y][x] == SPACE)
+			{
+				if (game->map->map[y][x - 1] != WALL)
+					ft_exit(1, "Map is not closed", game);
+				pass_space(game->map->map[y], &x);
+				if (game->map->map[y][x] != WALL)
+					ft_exit(1, "Map is not closed", game);
+			}
+			x++;
+		}
+	}
+}
+
 void	map_control(t_game *game)
 {
 	int	y;
@@ -31,11 +66,11 @@ void	map_control(t_game *game)
 	game->player = ft_calloc(1, sizeof(t_player));
 	if (!game->player)
 		ft_exit(1, "Memory allocation failed", game);
-	printf("%s", game->map->map[0]);
-
-	while (++y < game->map->height - 7)
+	while (++y < game->map->height - 8)
 	{
 		x = -1;
+		if (ft_len_not_nl(game->map->map[y]) == 0)
+			ft_exit(1, "The map can not be devided", game);
 		while (++x < ft_len_not_nl(game->map->map[y]))
 		{
 			if (ft_strchr(ELEMENTS, game->map->map[y][x]) == 0)
@@ -44,6 +79,7 @@ void	map_control(t_game *game)
 				player_dir(game, x, y, game->map->map[y][x]);
 		}
 	}
+	frame_control(game);
 }
 
 int	arr_len(char **arr)
@@ -118,30 +154,30 @@ void	data_control(t_game *game)
 
 void	data_args_control(t_game *game)
 {
-	if (ft_strncmp(game->map->map_copy[0], "NO", 2) == 0)
+	if (ft_strncmp(game->map->data->data[0], "NO", 2) == 0)
 		game->map->data->no = game->map->data->data[0];
 	else
-		ft_exit(1, "Invalid map data", game);
-	if (ft_strncmp(game->map->map_copy[1], "SO", 2) == 0)
+		ft_exit(1, "0 Invalid map data", game);
+	if (ft_strncmp(game->map->data->data[1], "SO", 2) == 0)
 		game->map->data->so = game->map->data->data[1];
 	else
-		ft_exit(1, "Invalid map data", game);
-	if (ft_strncmp(game->map->map_copy[2], "WE", 2) == 0)
+		ft_exit(1, "1 Invalid map data", game);
+	if (ft_strncmp(game->map->data->data[2], "WE", 2) == 0)
 		game->map->data->we = game->map->data->data[2];
 	else
-		ft_exit(1, "Invalid map data", game);
-	if (ft_strncmp(game->map->map_copy[3], "EA", 2) == 0)
+		ft_exit(1, "2 Invalid map data", game);
+	if (ft_strncmp(game->map->data->data[3], "EA", 2) == 0)
 		game->map->data->ea = game->map->data->data[3];
 	else
-		ft_exit(1, "Invalid map data", game);
-	if (ft_strncmp(game->map->map_copy[4], "F", 1) == 0)
-		game->map->data->floor = game->map->data->data[4];
+		ft_exit(1, "3 Invalid map data", game);
+	if (ft_strncmp(game->map->data->data[5], "F", 1) == 0)
+		game->map->data->floor = game->map->data->data[5];
 	else
-		ft_exit(1, "Invalid map data", game);
-	if (ft_strncmp(game->map->map_copy[5], "C", 1) == 0)
-		game->map->data->ceiling = game->map->data->data[5];
+		ft_exit(1, "4 Invalid map data", game);
+	if (ft_strncmp(game->map->data->data[6], "C", 1) == 0)
+		game->map->data->ceiling = game->map->data->data[6];
 	else
-		ft_exit(1, "Invalid map data", game);
+		ft_exit(1, "5 Invalid map data", game);
 	data_control(game);
 }
 
@@ -152,13 +188,12 @@ static void	parse_copymap(t_game *game)
 	y = -1;
 	while (++y < game->map->height)
 	{
-		if (y < 6)
+		if (y < 8)
 			game->map->data->data[y] = ft_substr(game->map->map_copy[y], 0,
 					ft_len_not_nl(game->map->map_copy[y]));
 		else
-			game->map->map[y - 6] = ft_substr(game->map->map_copy[y], 0,
+			game->map->map[y - 8] = ft_substr(game->map->map_copy[y], 0,
 					ft_len_not_nl(game->map->map_copy[y]));
-
 	}
 	data_args_control(game);
 }
@@ -167,14 +202,16 @@ void	map_init(t_game *game, int y)
 	game->map = ft_calloc(1, sizeof(t_map));
 	if (!game->map)
 		ft_exit(1, "Memory allocation failed", game);
-	game->map->map = ft_calloc(y - 5, sizeof(char *));
+	game->map->map = ft_calloc(y - 8, sizeof(char *));
+	if (!game->map->map)
+		ft_exit(1, "Memory allocation failed", game);
 	game->map->data = ft_calloc(1, sizeof(t_mapdata));
 	if (!game->map->data)
 		ft_exit(1, "Memory allocation failed", game);
 	game->map->map_copy = ft_calloc(y, sizeof(char *));
 	if (!game->map->map_copy)
 		ft_exit(1, "Memory allocation failed", game);
-	game->map->data->data = ft_calloc(7, sizeof(char *));
+	game->map->data->data = ft_calloc(9, sizeof(char *));
 	if (!game->map->data->data)
 		ft_exit(1, "Memory allocation failed", game);
 }
@@ -191,8 +228,7 @@ int	get_map_height(char *path)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if (ft_len_not_nl(line))
-			y++;
+		y++;
 		free(line);
 	}
 	free(line);
@@ -213,8 +249,7 @@ void	copy_map(t_game *game, char *path)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if (ft_len_not_nl(line))
-			game->map->map_copy[++y] = ft_strdup(line);
+		game->map->map_copy[++y] = ft_strdup(line);
 		free(line);
 	}
 	free(line);
