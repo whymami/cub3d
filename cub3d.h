@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:25:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/08/04 19:37:00 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/08/09 18:22:13 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,18 @@
 
 # define _SUCC_EXIT 0
 # define _FINISH_GAME 1
+
+# define ELEMENTS "10NSEW "
+# define DIR "NSEW"
+
+# define WALL '1'
+# define GROUND '0'
+# define NORTH 'N'
+# define SOUTH 'S'
+# define EAST 'E'
+# define WEST 'W'
+# define SPACE ' '
+
 
 typedef struct s_mapdata
 {
@@ -48,6 +60,8 @@ typedef struct s_player
 {
 	int			player_x;
 	int			player_y;
+	char		player_dir;
+	int 		dir_count;
 }				t_player;
 
 typedef struct s_game
@@ -63,6 +77,6 @@ void			map_path_control(char *path);
 void			get_map_size(char *path);
 int				ft_len_not_nl(char *str);
 char			**my_realloc_arr(char **ptr, size_t size);
-void	free_map(char **map, int y);
+void			free_map(char **map, int y);
 
 #endif
