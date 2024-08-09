@@ -49,5 +49,5 @@ fclean: clean
 re: fclean all
 
 run:
-	./$(NAME) maps/sa.cub
+	@./$(NAME) maps/sa.cub
 .PHONY: all clean fclean re
