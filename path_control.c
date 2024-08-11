@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:14:09 by muguveli          #+#    #+#             */
-/*   Updated: 2024/08/04 17:42:48 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/08/11 17:51:34 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	map_path_control(char *path)
 	if (cub_control(path))
 	{
 		if (fd >= 3)
-			get_map_size(path);
+			map(path);
 		else
 			ft_exit(1, "Map not found", NULL);
 	}

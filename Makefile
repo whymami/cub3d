@@ -9,7 +9,7 @@ MLX = $(MLX_DIR)/libmlx.a
 
 SRC = \
 	main.c map.c path_control.c \
-	utils.c
+	utils.c map_utils.c map_data_control.c \
 
 OBJ_DIR = obj
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
