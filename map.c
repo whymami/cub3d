@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:15:33 by muguveli          #+#    #+#             */
-/*   Updated: 2024/08/11 20:25:21 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/08/12 20:25:38 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	map_control(t_game *game)
 			ft_exit(1, "The map can not be devided", game);
 		while (++x < ft_len_not_nl(game->map->map[y]))
 		{
-			if (ft_strchr(ELEMENTS, game->map->map[y][x]) == 0)
+			if (ft_strchr(ELEMENTS, game->map->map[y][x]) == 0 && printf("%c\n", game->map->map[y][x]))
 				ft_exit(1, "Invalid map element", game);
 			if (ft_strchr(DIR, game->map->map[y][x]))
 				player_dir(game, x, y, game->map->map[y][x]);
@@ -123,6 +123,5 @@ void	map(char *path)
 	game->map->height = y;
 	copy_map(game, path);
 	parse_copymap(game);
-	game->map->height = y - 9;
 	map_control(game);
 }

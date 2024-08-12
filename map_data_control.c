@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:56:44 by muguveli          #+#    #+#             */
-/*   Updated: 2024/08/11 19:03:51 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/08/12 20:21:52 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,7 @@ static void	data_arg_type(char *check_str, t_game *game, int i)
 	else if (ft_strncmp(check_str, "C", 1) == 0)
 		game->map->data->ceiling = game->map->data->data[i];
 	else
-	{
-		printf("check_str: %s\n", check_str);
 		ft_exit(1, "Invalid map data", game);
-	}
 }
 
 void	data_args_control(t_game *game)
@@ -88,7 +85,7 @@ void	data_args_control(t_game *game)
 	int	i;
 
 	i = -1;
-	while (++i < 8)
+	while (game->map->data->data[++i])
 		if (ft_len_not_nl(game->map->data->data[i]))
 			data_arg_type(game->map->data->data[i], game, i);
 	data_control(game);

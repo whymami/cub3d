@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:25:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/08/11 20:25:36 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/08/12 20:27:02 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,53 +38,54 @@
 
 typedef struct s_mapdata
 {
-	char			**data;
-	char			*no;
-	char			*so;
-	char			*we;
-	char			*ea;
-	char			*ceiling;
-	char			*floor;
-}					t_mapdata;
+	char		**data;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	char		*ceiling;
+	char		*floor;
+	int data_height;
+}				t_mapdata;
 
 typedef struct s_map
 {
-	char			**map;
-	char			**map_copy;
-	t_mapdata		*data;
-	int				width;
-	int				height;
-}					t_map;
+	char		**map;
+	char		**map_copy;
+	t_mapdata	*data;
+	int			width;
+	int			height;
+}				t_map;
 
 typedef struct s_player
 {
-	int				player_x;
-	int				player_y;
-	char			player_dir;
-	int				dir_count;
-}					t_player;
+	int			player_x;
+	int			player_y;
+	char		player_dir;
+	int			dir_count;
+}				t_player;
 
 typedef struct s_game
 {
-	void			*mlx;
-	void			*win;
-	t_map			*map;
-	t_player		*player;
-}					t_game;
+	void		*mlx;
+	void		*win;
+	t_map		*map;
+	t_player	*player;
+}				t_game;
 
-void				ft_exit(int err_no, char *err, t_game *game);
-void				map_path_control(char *path);
-void				map(char *path);
-int					ft_len_not_nl(char *str);
-char				**my_realloc_arr(char **ptr, size_t size);
-void				free_map(char **map, int y);
+void			ft_exit(int err_no, char *err, t_game *game);
+void			map_path_control(char *path);
+void			map(char *path);
+int				ft_len_not_nl(char *str);
+char			**my_realloc_arr(char **ptr, size_t size);
+void			free_map(char **map, int y);
 
-void				map_init(t_game *game, int y);
-void				copy_map(t_game *game, char *path);
-void				parse_copymap(t_game *game);
-void				data_args_control(t_game *game);
-int					get_map_height(char *path);
-int					ft_str_digit(char *str);
-int					arr_len(char **arr);
+void			map_init(t_game *game, int y);
+void			copy_map(t_game *game, char *path);
+void			parse_copymap(t_game *game);
+void			data_args_control(t_game *game);
+int				get_map_height(char *path);
+int				ft_str_digit(char *str);
+int				arr_len(char **arr);
 
 #endif
