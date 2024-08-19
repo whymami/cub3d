@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:15:33 by muguveli          #+#    #+#             */
-/*   Updated: 2024/08/09 19:07:05 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/08/19 15:45:59 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,14 +221,10 @@ void	copy_map(t_game *game, char *path)
 	close(fd);
 }
 
-void	get_map_size(char *path)
+void	get_map_size(char *path, t_game *game)
 {
-	t_game	*game;
 	int		y;
 
-	game = ft_calloc(1, sizeof(t_game));
-	if (!game)
-		ft_exit(1, "Memory allocation failed", game);
 	y = get_map_height(path);
 	map_init(game, y);
 	game->map->height = y;
