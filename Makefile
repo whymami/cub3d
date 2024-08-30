@@ -14,7 +14,7 @@ SRC = \
 OBJ_DIR = obj
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 CC = gcc
 
 $(shell mkdir -p bin $(OBJ_DIR) )

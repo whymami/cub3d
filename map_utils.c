@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:54:58 by muguveli          #+#    #+#             */
-/*   Updated: 2024/08/12 20:34:02 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/08/30 17:37:25 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,14 @@ void	copy_map(t_game *game, char *path)
 
 	fd = open(path, O_RDONLY);
 	y = -1;
+	game->map->max_width = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
+		if ((int)ft_strlen(line) > game->map->max_width)
+			game->map->max_width = ft_strlen(line);
 		game->map->map_copy[++y] = ft_strdup(line);
 		free(line);
 	}
@@ -98,37 +101,33 @@ void	data_copy(t_game *game)
 					0, ft_len_not_nl(game->map->map_copy[y]));
 	game->map->data->data[data_i] = NULL;
 	game->map->data->data_height = y;
-	game->map->height = game->map->height - y;
 }
 
-void game_map_copy(t_game *game)
+void	game_map_copy(t_game *game)
 {
 	int	y;
-
-	y = -1;
-	while (++y < game->map->height)
-		game->map->map[y] = ft_substr(game->map->map_copy[y + game->map->data->data_height], 0,
-				ft_len_not_nl(game->map->map_copy[y]));
-	
-}
-void update_data_height(t_game *game)
-{
-	int	y;
-	int	i;
+	int x;
 
 	y = game->map->data->data_height;
-	while (y < game->map->height)
+	x = -1;
+	while (++x < game->map->height)
 	{
-		i = 0;
-		while (game->map->map_copy[y][i])
-		{
-			if (game->map->map_copy[y][i] == '1')
-				break ;
-			i++;
-		}
-		y++;	
+		game->map->map[x] = ft_substr(game->map->map_copy[y], 0,
+				ft_len_not_nl(game->map->map_copy[y]));
+		y++;
 	}
-	game->map->data->data_height = y - 1;
+	game->map->map[x] = NULL;
+}
+void	update_data_height(t_game *game)
+{
+	int	y;
+
+	y = game->map->data->data_height - 1;
+	while (++y < game->map->height)
+		if (ft_strchr(game->map->map_copy[y], '1'))
+			break ;
+	game->map->data->data_height = y;
+	game->map->height = game->map->height - game->map->data->data_height;
 }
 
 void	parse_copymap(t_game *game)

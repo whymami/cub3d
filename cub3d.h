@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:25:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/08/12 20:27:02 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/08/30 18:58:13 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define EAST 'E'
 # define WEST 'W'
 # define SPACE ' '
+# define STAR '*'
 
 typedef struct s_mapdata
 {
@@ -52,6 +53,8 @@ typedef struct s_map
 {
 	char		**map;
 	char		**map_copy;
+	int			max_width;
+	char		**ff_map;
 	t_mapdata	*data;
 	int			width;
 	int			height;
