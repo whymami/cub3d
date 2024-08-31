@@ -1,8 +1,0 @@
-.DS_Store
-.vscode/
-mlx/
-*.o
-libft.a
-a.out
-bin/
-obj/
