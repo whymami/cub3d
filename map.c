@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:15:33 by muguveli          #+#    #+#             */
-/*   Updated: 2024/08/30 19:44:23 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/08/31 12:02:31 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,4 +147,6 @@ void	map(char *path)
 	copy_map(game, path);
 	parse_copymap(game);
 	map_control(game);
+	mlx_initialize(game);
+	
 }

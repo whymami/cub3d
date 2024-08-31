@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:25:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/08/30 18:58:13 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/08/31 13:08:28 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "lib/libft/libft.h"
+# include "lib/mlx/mlx.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
@@ -24,6 +25,10 @@
 
 # define _SUCC_EXIT 0
 # define _FINISH_GAME 1
+
+# define WIN_HEIGHT 720
+# define WIN_WIDTH 1280
+# define WIN_TITLE "CUB3D"
 
 # define ELEMENTS "10NSEW "
 # define DIR "NSEW"
@@ -37,6 +42,12 @@
 # define SPACE ' '
 # define STAR '*'
 
+typedef struct	s_texture
+{
+	void	*img;
+	void	*wall;
+}				t_texture;
+
 typedef struct s_mapdata
 {
 	char		**data;
@@ -46,7 +57,7 @@ typedef struct s_mapdata
 	char		*ea;
 	char		*ceiling;
 	char		*floor;
-	int data_height;
+	int			data_height;
 }				t_mapdata;
 
 typedef struct s_map
@@ -74,6 +85,7 @@ typedef struct s_game
 	void		*win;
 	t_map		*map;
 	t_player	*player;
+	t_texture	*texture;
 }				t_game;
 
 void			ft_exit(int err_no, char *err, t_game *game);
@@ -90,5 +102,6 @@ void			data_args_control(t_game *game);
 int				get_map_height(char *path);
 int				ft_str_digit(char *str);
 int				arr_len(char **arr);
+void			mlx_initialize(t_game *game);
 
 #endif

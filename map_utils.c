@@ -36,13 +36,12 @@ void	map_init(t_game *game, int y)
 	game->map = ft_calloc(1, sizeof(t_map));
 	if (!game->map)
 		ft_exit(1, "Memory allocation failed", game);
-	game->map->map = ft_calloc(y - 8, sizeof(char *));
+	game->map->map = ft_calloc(y - 7, sizeof(char *));
 	if (!game->map->map)
 		ft_exit(1, "Memory allocation failed", game);
 	game->map->data = ft_calloc(1, sizeof(t_mapdata));
 	if (!game->map->data)
 		ft_exit(1, "Memory allocation failed", game);
-	;
 	game->map->data->data = ft_calloc(7, sizeof(char *));
 	if (!game->map->data->data)
 		ft_exit(1, "Memory allocation failed", game);
@@ -118,6 +117,7 @@ void	game_map_copy(t_game *game)
 	}
 	game->map->map[x] = NULL;
 }
+
 void	update_data_height(t_game *game)
 {
 	int	y;
