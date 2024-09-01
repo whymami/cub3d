@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 12:01:26 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/01 19:24:05 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/01 19:54:54 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	raycasting(t_game *game)
 		// Texture X koordinatını hesapla
 		texX = (int)(wallX * (double)(TEX_WIDTH));
 		if (side == 0 && rayDirX > 0)
-			texX = TEX_WIDTH - texX  - 1;
+			texX = TEX_WIDTH - texX - 1;
 		if (side == 1 && rayDirY < 0)
 			texX = TEX_WIDTH - texX - 1;
 		// Texturu seç
@@ -126,7 +126,7 @@ void	raycasting(t_game *game)
 		y = 0;
 		while (y <= drawStart)
 		{
-			game->textures->scene_data[y * WIN_WIDTH + x] = 0x0FFFF00;
+			game->textures->scene_data[y * WIN_WIDTH + x] = game->map->data->ceiling_rgb;
 			y++;
 		}
 		y = drawStart;
@@ -134,13 +134,13 @@ void	raycasting(t_game *game)
 		{
 			texY = (int)texPos & (TEX_HEIGHT - 1);
 			texPos += step;
-			color = ((int*)texture)[TEX_HEIGHT * texY + texX];
+			color = ((int *)texture)[TEX_HEIGHT * texY + texX];
 			game->textures->scene_data[y * WIN_WIDTH + x] = color;
 			y++;
 		}
 		while (y < WIN_HEIGHT)
 		{
-			game->textures->scene_data[y * WIN_WIDTH + x] = 0x00000FF;
+			game->textures->scene_data[y * WIN_WIDTH + x] = game->map->data->floor_rgb;
 			y++;
 		}
 	}
@@ -193,16 +193,16 @@ void	mlx_initialize(t_game *game)
 	game->player->plane_x = 0;
 	game->player->plane_y = -0.66;
 	game->textures = ft_calloc(1, sizeof(t_texture));
-	game->textures->so = mlx_xpm_file_to_image(game->mlx,
-			"./texture/asdasd.xpm", &x, &y);
+	game->textures->so = mlx_xpm_file_to_image(game->mlx, game->map->data->so
+			+ 3, &x, &y);
 	if (!game->textures->so)
 		ft_exit(1, "Error loading east texture", game);
-	game->textures->we = mlx_xpm_file_to_image(game->mlx,
-			"./texture/asdasd.xpm", &x, &y);
-	game->textures->ea = mlx_xpm_file_to_image(game->mlx,
-			"./texture/a.xpm", &x, &y);
-	game->textures->no = mlx_xpm_file_to_image(game->mlx,
-			"./texture/asdasd.xpm", &x, &y);
+	game->textures->we = mlx_xpm_file_to_image(game->mlx, game->map->data->we
+			+ 3, &x, &y);
+	game->textures->ea = mlx_xpm_file_to_image(game->mlx, game->map->data->ea
+			+ 3, &x, &y);
+	game->textures->no = mlx_xpm_file_to_image(game->mlx, game->map->data->no
+			+ 3, &x, &y);
 	game->textures->no_data = (int *)mlx_get_data_addr(game->textures->no,
 			&game->textures->bits_per_pixel, &game->textures->size_line,
 			&game->textures->endian);

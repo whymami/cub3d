@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:25:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/01 19:18:02 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/01 19:54:28 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ typedef struct s_mapdata
 	char		*ea;
 	char		*ceiling;
 	char		*floor;
+	int			ceiling_rgb;
+	int			floor_rgb;
 	int			data_height;
 }				t_mapdata;
 

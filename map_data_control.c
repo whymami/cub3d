@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_data_control.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:56:44 by muguveli          #+#    #+#             */
-/*   Updated: 2024/08/30 15:58:17 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/09/01 19:54:42 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static void	rgb_control(t_game *game)
 		floor_ceil_control(f[i], game);
 		floor_ceil_control(c[i], game);
 	}
+	game->map->data->floor_rgb = ft_atoi(f[0]) << 16 | ft_atoi(f[1]) << 8 | ft_atoi(f[2]);
+	game->map->data->ceiling_rgb = ft_atoi(c[0]) << 16 | ft_atoi(c[1]) << 8 | ft_atoi(c[2]);
 }
 
 static void	data_control(t_game *game)

@@ -1,10 +1,10 @@
 NO ./texture/asdasd.xpm
 SO ./texture/asdasd.xpm
-WE ./texture/asdasd.xpm
+WE ./texture/c.xpm
 EA ./texture/a.xpm
 
-F 220,100,0
-C 225,30,255
+F 0,120,50
+C 0,10,120
 
 11111111111111111111111111
 1000000000110000000000001
