@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:25:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/08/31 13:08:28 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/01 15:23:18 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 
 # define WIN_HEIGHT 720
 # define WIN_WIDTH 1280
+# define MOVE_SPEED 0.09
+# define ROT_SPEED 0.09
 # define WIN_TITLE "CUB3D"
 
 # define ELEMENTS "10NSEW "
@@ -42,10 +44,25 @@
 # define SPACE ' '
 # define STAR '*'
 
-typedef struct	s_texture
+# define KEY_ESC 53
+# define KEY_W 13
+# define KEY_S 1
+# define KEY_A 0
+# define KEY_D 2
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+
+typedef struct s_texture
 {
-	void	*img;
-	void	*wall;
+	void		*scene;
+	int			*scene_data;
+	void		*no;
+	void		*so;
+	void		*we;
+	void		*ea;
+	int			bits_per_pixel;
+	int			size_line;
+	int			endian;
 }				t_texture;
 
 typedef struct s_mapdata
@@ -73,10 +90,14 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	int			player_x;
-	int			player_y;
+	double		player_x;
+	double		player_y;
 	char		player_dir;
 	int			dir_count;
+	double		dir_x;
+	double		dir_y;
+	double		plane_y;
+	double		plane_x;
 }				t_player;
 
 typedef struct s_game
@@ -85,7 +106,7 @@ typedef struct s_game
 	void		*win;
 	t_map		*map;
 	t_player	*player;
-	t_texture	*texture;
+	t_texture	*textures;
 }				t_game;
 
 void			ft_exit(int err_no, char *err, t_game *game);
@@ -103,5 +124,10 @@ int				get_map_height(char *path);
 int				ft_str_digit(char *str);
 int				arr_len(char **arr);
 void			mlx_initialize(t_game *game);
+void			move_player(t_game *game, int sign);
+void			rotate_player(t_game *game, double rot_speed);
+void			create_scene(t_game *game);
+void			draw_scene(t_game *game, int x, int draw_start, int draw_end,
+					int color);
 
 #endif
