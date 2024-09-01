@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:25:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/01 15:23:18 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/01 19:18:02 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 
 # define WIN_HEIGHT 720
 # define WIN_WIDTH 1280
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
 # define MOVE_SPEED 0.09
 # define ROT_SPEED 0.09
 # define WIN_TITLE "CUB3D"
@@ -57,9 +59,13 @@ typedef struct s_texture
 	void		*scene;
 	int			*scene_data;
 	void		*no;
+	int 		*no_data;
 	void		*so;
+	int			*so_data;
 	void		*we;
+	int			*we_data;
 	void		*ea;
+	int			*ea_data;
 	int			bits_per_pixel;
 	int			size_line;
 	int			endian;
@@ -124,7 +130,7 @@ int				get_map_height(char *path);
 int				ft_str_digit(char *str);
 int				arr_len(char **arr);
 void			mlx_initialize(t_game *game);
-void			move_player(t_game *game, int sign);
+void			move_player(t_game *game, double next_x, double next_y);
 void			rotate_player(t_game *game, double rot_speed);
 void			create_scene(t_game *game);
 void			draw_scene(t_game *game, int x, int draw_start, int draw_end,

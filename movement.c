@@ -6,32 +6,18 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 13:32:31 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/01 15:27:33 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/01 18:22:01 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	move_player(t_game *game, int sign)
+void	move_player(t_game *game, double next_x, double next_y)
 {
-	if (sign == 0)
-	{
-		if (game->map->map[(int)(game->player->player_x + game->player->dir_x
-				* MOVE_SPEED)][(int)game->player->player_y] != WALL)
-			game->player->player_x += game->player->dir_x * MOVE_SPEED;
-		if (game->map->map[(int)game->player->player_x][(int)(game->player->player_y
-				+ game->player->dir_y * MOVE_SPEED)] != WALL)
-			game->player->player_y += game->player->dir_y * MOVE_SPEED;
-	}
-	else if (sign == 1)
-	{
-		if (game->map->map[(int)(game->player->player_x - game->player->dir_x
-				* MOVE_SPEED)][(int)game->player->player_y] != WALL)
-			game->player->player_x -= game->player->dir_x * MOVE_SPEED;
-		if (game->map->map[(int)game->player->player_x][(int)(game->player->player_y
-				- game->player->dir_y * MOVE_SPEED)] != WALL)
-			game->player->player_y -= game->player->dir_y * MOVE_SPEED;
-	}
+	if (game->map->map[(int)(game->player->player_y)][(int)(game->player->player_x + next_x)] != '1')
+		game->player->player_x += next_x;
+	if (game->map->map[(int)(game->player->player_y + next_y)][(int)(game->player->player_x)] != '1')
+		game->player->player_y += next_y;
 }
 
 void	rotate_player(t_game *game, double rot_speed)

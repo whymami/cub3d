@@ -1,7 +1,7 @@
-NO ./texture/asdasd
-SO ./texture/asdasd
-WE ./texture/asdasd
-EA ./texture/asdasd
+NO ./texture/asdasd.xpm
+SO ./texture/asdasd.xpm
+WE ./texture/asdasd.xpm
+EA ./texture/a.xpm
 
 F 220,100,0
 C 225,30,255
