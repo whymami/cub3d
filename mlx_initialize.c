@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 12:01:26 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/01 19:54:54 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/02 10:04:21 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,11 +177,6 @@ int	key_press(int keycode, void *param)
 
 void	mlx_initialize(t_game *game)
 {
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		ft_exit(1, "mlx_init() error", game);
@@ -192,33 +187,12 @@ void	mlx_initialize(t_game *game)
 	game->player->dir_y = 0;
 	game->player->plane_x = 0;
 	game->player->plane_y = -0.66;
-	game->textures = ft_calloc(1, sizeof(t_texture));
-	game->textures->so = mlx_xpm_file_to_image(game->mlx, game->map->data->so
-			+ 3, &x, &y);
-	if (!game->textures->so)
-		ft_exit(1, "Error loading east texture", game);
-	game->textures->we = mlx_xpm_file_to_image(game->mlx, game->map->data->we
-			+ 3, &x, &y);
-	game->textures->ea = mlx_xpm_file_to_image(game->mlx, game->map->data->ea
-			+ 3, &x, &y);
-	game->textures->no = mlx_xpm_file_to_image(game->mlx, game->map->data->no
-			+ 3, &x, &y);
-	game->textures->no_data = (int *)mlx_get_data_addr(game->textures->no,
-			&game->textures->bits_per_pixel, &game->textures->size_line,
-			&game->textures->endian);
-	game->textures->so_data = (int *)mlx_get_data_addr(game->textures->so,
-			&game->textures->bits_per_pixel, &game->textures->size_line,
-			&game->textures->endian);
-	game->textures->we_data = (int *)mlx_get_data_addr(game->textures->we,
-			&game->textures->bits_per_pixel, &game->textures->size_line,
-			&game->textures->endian);
-	game->textures->ea_data = (int *)mlx_get_data_addr(game->textures->ea,
-			&game->textures->bits_per_pixel, &game->textures->size_line,
-			&game->textures->endian);
-	if (!game->textures)
-		ft_exit(1, "Memory allocation failed", game);
+	init_textures(game);
 	create_scene(game);
 	raycasting(game);
 	mlx_hook(game->win, 2, 1L << 0, key_press, game);
+	// mlx_hook(game->win,  1,0, key_release, game);
+	// mlx_hook(game->win, 17, 1L << 17, ft_exit, game);
+	// mlx_loop_hook(game->mlx, key_press, game);
 	mlx_loop(game->mlx);
 }

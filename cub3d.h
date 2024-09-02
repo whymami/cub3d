@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:25:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/01 19:54:28 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/02 09:56:05 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_texture
 	void		*scene;
 	int			*scene_data;
 	void		*no;
-	int 		*no_data;
+	int			*no_data;
 	void		*so;
 	int			*so_data;
 	void		*we;
@@ -137,5 +137,5 @@ void			rotate_player(t_game *game, double rot_speed);
 void			create_scene(t_game *game);
 void			draw_scene(t_game *game, int x, int draw_start, int draw_end,
 					int color);
-
+void			init_textures(t_game *game);
 #endif

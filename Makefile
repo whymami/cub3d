@@ -9,7 +9,7 @@ MLX = $(MLX_DIR)/libmlx.a
 LDFLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 SRC = main.c map.c path_control.c utils.c map_utils.c map_data_control.c \
-		mlx_initialize.c raycasting.c draw.c movement.c
+		mlx_initialize.c raycasting.c draw.c movement.c texture.c
 
 
 OBJ_DIR = obj
