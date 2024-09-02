@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 14:10:38 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/02 16:50:34 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/02 19:10:44 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	player_start_dir2(t_player *player)
 
 void	player_start_dir(t_game *game)
 {
-	t_player *player;
+	t_player	*player;
 
 	player = game->player;
 	if (player->player_dir == NORTH)

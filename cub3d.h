@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:25:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/02 18:16:27 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/02 19:17:34 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@
 # define KEY_D 2
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
+# define SHIFT 257
 
 typedef struct s_texture
 {
@@ -106,6 +107,7 @@ typedef struct s_player
 	double		dir_y;
 	double		plane_y;
 	double		plane_x;
+	int			boost;
 }				t_player;
 
 typedef struct s_ray
@@ -134,6 +136,17 @@ typedef struct s_ray
 	double		cameraX;
 }				t_ray;
 
+typedef struct s_move
+{
+	int			w;
+	int			a;
+	int			s;
+	int			d;
+	int			left;
+	int			right;
+	int			shift;
+}				t_move;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -142,6 +155,7 @@ typedef struct s_game
 	t_player	*player;
 	t_texture	*textures;
 	t_ray		*ray;
+	t_move		*move;
 }				t_game;
 
 void			ft_exit(int err_no, char *err, t_game *game);
