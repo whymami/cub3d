@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 13:49:38 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/02 10:05:46 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/02 14:07:47 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,37 @@
 
 void	create_scene(t_game *game)
 {
-	t_texture	*texture;
+	t_texture	*tex;
 
-	texture = game->textures;
-	texture->scene = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	texture->scene_data = (int *)mlx_get_data_addr(texture->scene,
-			&texture->bits_per_pixel, &texture->size_line, &texture->endian);
+	tex = game->textures;
+	tex->scene = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	tex->scene_data = (int *)mlx_get_data_addr(tex->scene, &tex->bits_per_pixel,
+			&tex->size_line, &tex->endian);
+	game->textures = tex;
 }
 
-void	draw_scene(t_game *game, int x, int draw_start, int draw_end, int color)
+void	draw_scene(t_game *game, int x)
 {
-	t_texture	*texture;
-	int			y;
+	t_ray	*ray;
+	int		y;
 
-	texture = game->textures;
-	y = 0;
-	while (y <= draw_start)
+	ray = game->ray;
+	ray->step = 1.0 * TEX_HEIGHT / ray->line_height;
+	ray->tex_pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2)
+		* ray->step;
+	y = -1;
+	while (++y <= ray->draw_start)
+		game->textures->scene_data[y * WIN_WIDTH
+			+ x] = game->map->data->ceiling_rgb;
+	while (y < ray->draw_end)
 	{
-		texture->scene_data[y * WIN_WIDTH + x] = 0x0FFFF00;
+		ray->tex_y = (int)ray->tex_pos & (TEX_HEIGHT - 1);
+		ray->tex_pos += ray->step;
+		ray->color = ray->texture[TEX_HEIGHT * ray->tex_y + ray->tex_x];
+		game->textures->scene_data[y * WIN_WIDTH + x] = ray->color;
 		y++;
 	}
-	y = draw_start;
-	while (y++ < draw_end)
-	{
-		texture->scene_data[y * WIN_WIDTH + x] = color;
-	}
-	while (y < WIN_HEIGHT)
-	{
-		texture->scene_data[y * WIN_WIDTH + x] = 0x00000FF;
-		y++;
-	}
+	while (++y < WIN_HEIGHT)
+		game->textures->scene_data[y * WIN_WIDTH
+			+ x] = game->map->data->floor_rgb;
 }

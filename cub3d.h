@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:25:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/02 09:56:05 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/02 14:00:44 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,31 @@ typedef struct s_player
 	double		plane_x;
 }				t_player;
 
+typedef struct s_ray
+{
+	double		ray_dir_x;
+	double		ray_dir_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	double		perp_wall_dist;
+	int			step_x;
+	int			step_y;
+	int			hit;
+	int			side;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	int			tex_x;
+	int			tex_y;
+	int			*texture;
+	double		tex_pos;
+	int			color;
+	double		wall_x;
+	double		step;
+}				t_ray;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -115,6 +140,7 @@ typedef struct s_game
 	t_map		*map;
 	t_player	*player;
 	t_texture	*textures;
+	t_ray		*ray;
 }				t_game;
 
 void			ft_exit(int err_no, char *err, t_game *game);
@@ -135,7 +161,10 @@ void			mlx_initialize(t_game *game);
 void			move_player(t_game *game, double next_x, double next_y);
 void			rotate_player(t_game *game, double rot_speed);
 void			create_scene(t_game *game);
-void			draw_scene(t_game *game, int x, int draw_start, int draw_end,
-					int color);
+void			draw_scene(t_game *game, int x);
 void			init_textures(t_game *game);
+void			init_ray(t_game *game);
+void			set_wall_texture(t_game *game);
+void			set_texture_coordinate(t_game *game);
+void			set_wall_coordinate(t_game *game);
 #endif

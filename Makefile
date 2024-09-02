@@ -9,8 +9,8 @@ MLX = $(MLX_DIR)/libmlx.a
 LDFLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 SRC = main.c map.c path_control.c utils.c map_utils.c map_data_control.c \
-		mlx_initialize.c raycasting.c draw.c movement.c texture.c
-
+		mlx_initialize.c raycasting.c draw.c movement.c texture.c \
+		set_ray_coordinate.c init_ray.c
 
 OBJ_DIR = obj
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)

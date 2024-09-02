@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 12:01:26 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/02 10:04:21 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/02 15:48:51 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,26 @@ void	raycasting(t_game *game)
 {
 	int		x;
 	double	cameraX;
-	double	rayDirX;
-	double	rayDirY;
 	int		mapX;
 	int		mapY;
 	double	deltaDistX;
 	double	deltaDistY;
 	int		hit;
-	int		side;
-	double	perpWallDist;
-	int		lineHeight;
-	int		drawStart;
-	int		drawEnd;
-	double	wallX;
-	int		texX;
-	double	step;
-	double	texPos;
-	int		texY;
-	int		color;
-	void	*texture;
-	int		y;
 
 	for (x = 0; x < WIN_WIDTH; x++)
 	{
 		cameraX = 2 * x / (double)WIN_WIDTH - 1;
-		rayDirX = game->player->dir_x + game->player->plane_x * cameraX;
-		rayDirY = game->player->dir_y + game->player->plane_y * cameraX;
+		game->ray->ray_dir_x = game->player->dir_x + game->player->plane_x
+			* cameraX;
+		game->ray->ray_dir_y = game->player->dir_y + game->player->plane_y
+			* cameraX;
 		mapX = (int)game->player->player_x;
 		mapY = (int)game->player->player_y;
-		deltaDistX = fabs(1 / rayDirX);
-		deltaDistY = fabs(1 / rayDirY);
+		deltaDistX = fabs(1 / game->ray->ray_dir_x);
+		deltaDistY = fabs(1 / game->ray->ray_dir_y);
 		double sideDistX, sideDistY;
 		int stepX, stepY;
-		if (rayDirX < 0)
+		if (game->ray->ray_dir_x < 0)
 		{
 			stepX = -1;
 			sideDistX = (game->player->player_x - mapX) * deltaDistX;
@@ -58,7 +45,7 @@ void	raycasting(t_game *game)
 			stepX = 1;
 			sideDistX = (mapX + 1.0 - game->player->player_x) * deltaDistX;
 		}
-		if (rayDirY < 0)
+		if (game->ray->ray_dir_y < 0)
 		{
 			stepY = -1;
 			sideDistY = (game->player->player_y - mapY) * deltaDistY;
@@ -71,78 +58,38 @@ void	raycasting(t_game *game)
 		hit = 0;
 		while (hit == 0)
 		{
-			if (sideDistX < sideDistY)
+			if (game->ray->side_dist_x < game->ray->side_dist_y)
 			{
-				sideDistX += deltaDistX;
-				mapX += stepX;
-				side = 0;
+				game->ray->side_dist_x += game->ray->side_dist_x;
+				mapX += game->ray->step_x;
+				game->ray->side = 0;
 			}
 			else
 			{
-				sideDistY += deltaDistY;
-				mapY += stepY;
-				side = 1;
+				game->ray->side_dist_y += game->ray->side_dist_y;
+				mapY += game->ray->step_y;
+				game->ray->side = 1;
 			}
 			if (game->map->map[mapX][mapY] == '1')
 				hit = 1;
 		}
-		if (side == 0)
-			perpWallDist = (mapX - game->player->player_x + (1 - stepX) / 2)
-				/ rayDirX;
+		if (game->ray->side == 0)
+			game->ray->perp_wall_dist = (mapX - game->player->player_x + (1
+						- stepX) / 2) / game->ray->ray_dir_x;
 		else
-			perpWallDist = (mapY - game->player->player_y + (1 - stepY) / 2)
-				/ rayDirY;
-		lineHeight = (int)(WIN_HEIGHT / perpWallDist);
-		drawStart = -lineHeight / 2 + WIN_HEIGHT / 2;
-		if (drawStart < 0)
-			drawStart = 0;
-		drawEnd = lineHeight / 2 + WIN_HEIGHT / 2;
-		if (drawEnd >= WIN_HEIGHT)
-			drawEnd = WIN_HEIGHT - 1;
-		// Duvarın X koordinatını hesapla
-		if (side == 0)
-			wallX = game->player->player_y + perpWallDist * rayDirY;
-		else
-			wallX = game->player->player_x + perpWallDist * rayDirX;
-		wallX -= floor(wallX);
-		// Texture X koordinatını hesapla
-		texX = (int)(wallX * (double)(TEX_WIDTH));
-		if (side == 0 && rayDirX > 0)
-			texX = TEX_WIDTH - texX - 1;
-		if (side == 1 && rayDirY < 0)
-			texX = TEX_WIDTH - texX - 1;
-		// Texturu seç
-		if (side == 0 && rayDirX > 0)
-			texture = game->textures->we_data;
-		else if (side == 0 && rayDirX < 0)
-			texture = game->textures->ea_data;
-		else if (side == 1 && rayDirY > 0)
-			texture = game->textures->no_data;
-		else
-			texture = game->textures->so_data;
-		// Texture boyuna göre adım belirle
-		step = 1.0 * TEX_HEIGHT / lineHeight;
-		texPos = (drawStart - WIN_HEIGHT / 2 + lineHeight / 2) * step;
-		y = 0;
-		while (y <= drawStart)
-		{
-			game->textures->scene_data[y * WIN_WIDTH + x] = game->map->data->ceiling_rgb;
-			y++;
-		}
-		y = drawStart;
-		while (y < drawEnd)
-		{
-			texY = (int)texPos & (TEX_HEIGHT - 1);
-			texPos += step;
-			color = ((int *)texture)[TEX_HEIGHT * texY + texX];
-			game->textures->scene_data[y * WIN_WIDTH + x] = color;
-			y++;
-		}
-		while (y < WIN_HEIGHT)
-		{
-			game->textures->scene_data[y * WIN_WIDTH + x] = game->map->data->floor_rgb;
-			y++;
-		}
+			game->ray->perp_wall_dist = (mapY - game->player->player_y + (1
+						- stepY) / 2) / game->ray->ray_dir_y;
+		game->ray->line_height = (int)(WIN_HEIGHT / game->ray->perp_wall_dist);
+		game->ray->draw_start = -game->ray->line_height / 2 + WIN_HEIGHT / 2;
+		if (game->ray->draw_start < 0)
+			game->ray->draw_start = 0;
+		game->ray->draw_end = game->ray->line_height / 2 + WIN_HEIGHT / 2;
+		if (game->ray->draw_end >= WIN_HEIGHT)
+			game->ray->draw_end = WIN_HEIGHT - 1;
+		set_wall_coordinate(game);
+		set_texture_coordinate(game);
+		set_wall_texture(game);
+		draw_scene(game, x);
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->textures->scene, 0, 0);
 }
@@ -189,6 +136,7 @@ void	mlx_initialize(t_game *game)
 	game->player->plane_y = -0.66;
 	init_textures(game);
 	create_scene(game);
+	init_ray(game);
 	raycasting(game);
 	mlx_hook(game->win, 2, 1L << 0, key_press, game);
 	// mlx_hook(game->win,  1,0, key_release, game);
