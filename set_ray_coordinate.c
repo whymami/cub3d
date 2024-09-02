@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 14:11:15 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/02 14:11:31 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/02 22:46:23 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	set_texture_coordinate(t_game *game)
 
 void	set_wall_coordinate(t_game *game)
 {
-	t_ray *ray;
+	t_ray	*ray;
 
 	ray = game->ray;
 	if (ray->side == 0)

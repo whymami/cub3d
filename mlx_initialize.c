@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 12:01:26 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/02 19:55:26 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/02 22:44:24 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	key_release(int keycode, void *param)
 	}
 	return (0);
 }
-
 
 int	key_hook(void *param)
 {

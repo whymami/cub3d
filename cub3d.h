@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:25:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/02 19:17:34 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/02 22:37:44 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # define WIN_WIDTH 1280
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
-# define MOVE_SPEED 0.09
-# define ROT_SPEED 0.09
+# define MOVE_SPEED 0.03
+# define ROT_SPEED 0.03
 # define WIN_TITLE "CUB3D"
 
 # define ELEMENTS "10NSEW "

@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 13:32:31 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/02 17:41:07 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/02 22:45:53 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 
 void	move_player(t_game *game, double next_x, double next_y)
 {
-	if (game->map->map[(int)(game->player->player_x
-			+ next_x)][(int)(game->player->player_y)] != WALL)
-		game->player->player_x += next_x;
-	if (game->map->map[(int)(game->player->player_x)][(int)(game->player->player_y
+	t_map		*map;
+	t_player	*player;
+
+	player = game->player;
+	map = game->map;
+	if (map->map[(int)(player->player_x
+			+ next_x)][(int)(player->player_y)] != WALL)
+		player->player_x += next_x;
+	if (map->map[(int)(player->player_x)][(int)(player->player_y
 			+ next_y)] != WALL)
-		game->player->player_y += next_y;
+		player->player_y += next_y;
 }
 
 void	rotate_player(t_game *game, double rot_speed)

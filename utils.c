@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:59:09 by muguveli          #+#    #+#             */
-/*   Updated: 2024/08/11 18:21:49 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/09/02 22:46:41 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,3 @@ int	arr_len(char **arr)
 		i++;
 	return (i);
 }
-

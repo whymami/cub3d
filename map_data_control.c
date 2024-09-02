@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:56:44 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/01 19:54:42 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/02 22:43:08 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,15 @@ static void	floor_ceil_control(char *str, t_game *game)
 
 static void	rgb_control(t_game *game)
 {
-	char	**f;
-	char	**c;
-	int		i;
+	char		**f;
+	char		**c;
+	int			i;
+	t_mapdata	*dt;
 
-	f = ft_split(game->map->data->floor + 2, ',');
-	c = ft_split(game->map->data->ceiling + 2, ',');
-	if (arr_len(f) != 3 || arr_len(c) != 3) // free f and c
+	dt = game->map->data;
+	f = ft_split(dt->floor + 2, ',');
+	c = ft_split(dt->ceiling + 2, ',');
+	if (arr_len(f) != 3 || arr_len(c) != 3)
 		ft_exit(1, "Invalid rgb values", game);
 	i = -1;
 	while (++i < 3)
@@ -40,8 +42,8 @@ static void	rgb_control(t_game *game)
 		floor_ceil_control(f[i], game);
 		floor_ceil_control(c[i], game);
 	}
-	game->map->data->floor_rgb = ft_atoi(f[0]) << 16 | ft_atoi(f[1]) << 8 | ft_atoi(f[2]);
-	game->map->data->ceiling_rgb = ft_atoi(c[0]) << 16 | ft_atoi(c[1]) << 8 | ft_atoi(c[2]);
+	dt->floor_rgb = ft_atoi(f[0]) << 16 | ft_atoi(f[1]) << 8 | ft_atoi(f[2]);
+	dt->ceiling_rgb = ft_atoi(c[0]) << 16 | ft_atoi(c[1]) << 8 | ft_atoi(c[2]);
 }
 
 static void	data_control(t_game *game)

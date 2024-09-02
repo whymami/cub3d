@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:54:58 by muguveli          #+#    #+#             */
-/*   Updated: 2024/08/30 17:37:25 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/09/02 22:57:52 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,29 +50,6 @@ void	map_init(t_game *game, int y)
 		ft_exit(1, "Memory allocation failed", game);
 }
 
-void	copy_map(t_game *game, char *path)
-{
-	int		fd;
-	char	*line;
-	int		y;
-
-	fd = open(path, O_RDONLY);
-	y = -1;
-	game->map->max_width = 0;
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		if ((int)ft_strlen(line) > game->map->max_width)
-			game->map->max_width = ft_strlen(line);
-		game->map->map_copy[++y] = ft_strdup(line);
-		free(line);
-	}
-	free(line);
-	close(fd);
-}
-
 static int	is_data(char *line)
 {
 	if (!line || ft_len_not_nl(line) == 0)
@@ -102,22 +79,6 @@ void	data_copy(t_game *game)
 	game->map->data->data_height = y;
 }
 
-void	game_map_copy(t_game *game)
-{
-	int	y;
-	int x;
-
-	y = game->map->data->data_height;
-	x = -1;
-	while (++x < game->map->height)
-	{
-		game->map->map[x] = ft_substr(game->map->map_copy[y], 0,
-				ft_len_not_nl(game->map->map_copy[y]));
-		y++;
-	}
-	game->map->map[x] = NULL;
-}
-
 void	update_data_height(t_game *game)
 {
 	int	y;
@@ -128,12 +89,4 @@ void	update_data_height(t_game *game)
 			break ;
 	game->map->data->data_height = y;
 	game->map->height = game->map->height - game->map->data->data_height;
-}
-
-void	parse_copymap(t_game *game)
-{
-	data_copy(game);
-	data_args_control(game);
-	update_data_height(game);
-	game_map_copy(game);
 }
