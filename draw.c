@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 13:49:38 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/02 14:07:47 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/02 16:32:24 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ void	draw_scene(t_game *game, int x)
 		game->textures->scene_data[y * WIN_WIDTH + x] = ray->color;
 		y++;
 	}
-	while (++y < WIN_HEIGHT)
+	while (y < WIN_HEIGHT)
+	{
 		game->textures->scene_data[y * WIN_WIDTH
 			+ x] = game->map->data->floor_rgb;
+		y++;
+	}
 }

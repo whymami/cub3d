@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:25:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/02 14:00:44 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/02 18:16:27 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct s_ray
 	int			color;
 	double		wall_x;
 	double		step;
+	double		cameraX;
 }				t_ray;
 
 typedef struct s_game
@@ -167,4 +168,6 @@ void			init_ray(t_game *game);
 void			set_wall_texture(t_game *game);
 void			set_texture_coordinate(t_game *game);
 void			set_wall_coordinate(t_game *game);
+void			player_start_dir(t_game *game);
+void			raycasting(t_game *game);
 #endif
