@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 22:57:06 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/03 16:14:08 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/09/03 20:30:53 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	copy_map(t_game *game, char *path)
 		game->map->map_copy[++y] = ft_strdup(line);
 		free(line);
 	}
+	game->map->map_copy[++y] = NULL;
 	free(line);
 	close(fd);
 }

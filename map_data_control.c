@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:56:44 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/03 16:13:28 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/09/03 20:34:58 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,19 @@ void	free_arr(char **arr)
 		free(arr);
 	}
 }
+void	comma_count(char *line, t_game *game)
+{
+	int	i;
+	int	count;
+
+	i = -1;
+	count = 0;
+	while (line[++i])
+		if (line[i] == ',')
+			++count;
+	if (count > 2)
+		ft_exit(2, "comma count error", game);
+}
 
 static void	rgb_control(t_game *game)
 {
@@ -48,7 +61,9 @@ static void	rgb_control(t_game *game)
 	t_mapdata	*dt;
 
 	dt = game->map->data;
-	f = ft_split(dt->floor + 2, ','); // trim
+	comma_count(dt->ceiling, game);
+	comma_count(dt->floor, game);
+	f = ft_split(dt->floor + 2, ',');
 	c = ft_split(dt->ceiling + 2, ',');
 	if (arr_len(f) != 3 || arr_len(c) != 3)
 		ft_exit(1, "Invalid rgb values", game);
@@ -104,6 +119,7 @@ static void	data_arg_type(char *check_str, t_game *game, int i)
 		game->map->data->ceiling = game->map->data->data[i];
 	else
 		ft_exit(1, "Invalid map data", game);
+	printf("%s\n", game->map->data->data[i]);
 }
 
 void	data_args_control(t_game *game)
@@ -113,6 +129,6 @@ void	data_args_control(t_game *game)
 	i = -1;
 	while (game->map->data->data[++i])
 		if (ft_len_not_nl(game->map->data->data[i]))
-			data_arg_type(game->map->data->data[i], game, i);	
+			data_arg_type(game->map->data->data[i], game, i);
 	data_control(game);
 }

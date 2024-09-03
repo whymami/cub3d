@@ -6,16 +6,16 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:15:33 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/03 16:14:46 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/09/03 21:00:15 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	player_dir(t_game *game, int x, int y, char dir)
+void	player_dir(t_game *game, int y, int x, char dir)
 {
-	game->player->player_x = x;
-	game->player->player_y = y;
+	game->player->player_x = x + 0.5;
+	game->player->player_y = y + 0.5;
 	game->player->player_dir = dir;
 	game->player->dir_count++;
 	if (game->player->dir_count > 1)

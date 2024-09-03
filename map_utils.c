@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:54:58 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/03 16:16:18 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/09/03 20:31:02 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,13 @@ void	map_init(t_game *game, int y)
 	game->map = ft_calloc(1, sizeof(t_map));
 	if (!game->map)
 		ft_exit(1, "Memory allocation failed", game);
-	game->map->map = ft_calloc(y - 7, sizeof(char *));
-	if (!game->map->map)
-		ft_exit(1, "Memory allocation failed", game);
 	game->map->data = ft_calloc(1, sizeof(t_mapdata));
 	if (!game->map->data)
 		ft_exit(1, "Memory allocation failed", game);
 	game->map->data->data = ft_calloc(7, sizeof(char *));
 	if (!game->map->data->data)
 		ft_exit(1, "Memory allocation failed", game);
-	game->map->map_copy = ft_calloc(y, sizeof(char *));
+	game->map->map_copy = ft_calloc(y + 1, sizeof(char *));
 	if (!game->map->map_copy)
 		ft_exit(1, "Memory allocation failed", game);
 }
@@ -89,4 +86,7 @@ void	update_data_height(t_game *game)
 			break ;
 	game->map->data->data_height = y;
 	game->map->height = game->map->height - game->map->data->data_height;
+	game->map->map = ft_calloc(game->map->height + 1, sizeof(char *));
+	if (!game->map->map)
+		ft_exit(1, "Memory allocation failed", game);
 }
