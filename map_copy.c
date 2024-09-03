@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 22:57:06 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/03 16:26:26 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/03 23:00:37 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	copy_map(t_game *game, char *path)
 		game->map->map_copy[++y] = ft_strdup(line);
 		free(line);
 	}
+	game->map->map_copy[++y] = NULL;
 	free(line);
 	close(fd);
 }

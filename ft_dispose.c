@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:28:10 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/03 16:41:51 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/03 22:59:18 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,29 @@ void	ft_dispose_map(t_game *game)
 	if (game->map)
 	{
 		i = -1;
-		if (!game->map->map)
-			return ;
-		while (game->map->map[++i])
-			free(game->map->map[i]);
-		free(game->map->map);
+		if (game->map->map)
+		{
+			while (game->map->map[++i])
+				free(game->map->map[i]);
+			free(game->map->map);
+		}
 		i = -1;
 		if (game->map->data)
 		{
 			if (game->map->data->data)
 			{
 				while (++i < 7)
-					free(game->map->data->data[i]);
+					if (game->map->data->data[i])
+						free(game->map->data->data[i]);
 				free(game->map->data->data);
 			}
 			free(game->map->data);
 		}
 		if (game->map->map_copy)
 		{
-			i = -1;
-			while (game->map->map_copy[++i])
-				free(game->map->map_copy[i]);
+			i = 0;
+			while (game->map->map_copy[i])
+				free(game->map->map_copy[i++]);
 			free(game->map->map_copy);
 		}
 		if (game->map->ff_map)
@@ -73,6 +75,8 @@ void	ft_dispose_map(t_game *game)
 
 void	ft_dispose(t_game *game)
 {
+	if(!game)
+		return;
 	if (game->player)
 		free(game->player);
 	if (game->ray)

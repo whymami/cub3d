@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:59:09 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/03 16:19:06 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/03 23:01:15 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_len_not_nl(char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i] != '\n' && str[i] != '\0')
 		i++;
 	return (i);

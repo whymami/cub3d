@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_ray_coordinate.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 14:11:15 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/02 22:46:23 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/03 21:06:18 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	set_wall_texture(t_game *game)
 
 	ray = game->ray;
 	if (ray->side == 0 && ray->ray_dir_x > 0)
-		ray->texture = game->textures->we_data;
-	else if (ray->side == 0 && ray->ray_dir_x < 0)
-		ray->texture = game->textures->ea_data;
-	else if (ray->side == 1 && ray->ray_dir_y > 0)
 		ray->texture = game->textures->no_data;
-	else
+	else if (ray->side == 0 && ray->ray_dir_x < 0)
 		ray->texture = game->textures->so_data;
+	else if (ray->side == 1 && ray->ray_dir_y > 0)
+		ray->texture = game->textures->we_data;
+	else
+		ray->texture = game->textures->ea_data;
 	game->ray = ray;
 }
 

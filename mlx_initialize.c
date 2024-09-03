@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 12:01:26 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/03 14:08:01 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/09/03 21:10:29 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,15 @@ int	key_hook(void *param)
 		move_player(game, -(game->player->dir_x * MOVE_SPEED),
 			-(game->player->dir_y * MOVE_SPEED));
 	if (game->move->a)
-		move_player(game, (game->player->dir_y * MOVE_SPEED),
-			-(game->player->dir_x * MOVE_SPEED));
+		move_player(game, -(game->player->dir_y * MOVE_SPEED),
+			(game->player->dir_x * MOVE_SPEED));
 	if (game->move->d)
-		move_player(game, -(game->player->dir_y * MOVE_SPEED), (game->player->dir_x
+		move_player(game, (game->player->dir_y * MOVE_SPEED), -(game->player->dir_x
 				* MOVE_SPEED));
 	if (game->move->right)
-		rotate_player(game, ROT_SPEED);
-	if (game->move->left)
 		rotate_player(game, -ROT_SPEED);
+	if (game->move->left)
+		rotate_player(game, ROT_SPEED);
 	raycasting(game);
 	return (0);
 }

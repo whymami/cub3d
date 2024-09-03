@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:56:44 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/03 16:24:50 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/03 23:05:54 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,35 @@ static void	floor_ceil_control(char *str, t_game *game)
 	}
 	else
 		ft_exit(1, "Invalid rgb value", game);
+}
+
+void	free_arr(char **arr)
+{
+	int	i;
+
+	i = -1;
+	if (arr)
+	{
+		if (*arr)
+		{
+			while (arr[++i])
+				free(arr[i]);
+		}
+		free(arr);
+	}
+}
+void	comma_count(char *line, t_game *game)
+{
+	int	i;
+	int	count;
+
+	i = -1;
+	count = 0;
+	while (line[++i])
+		if (line[i] == ',')
+			++count;
+	if (count > 2)
+		ft_exit(2, "comma count error", game);
 }
 
 static void	rgb_control(t_game *game)
@@ -43,6 +72,9 @@ static void	rgb_control(t_game *game)
 	line = ft_strtrim(dt->floor, " ");
 	if (!line)
 		ft_exit(1, "Invalid floor color", game);
+	comma_count(dt->ceiling, game);
+	comma_count(dt->floor, game);
+	f = ft_split(dt->floor + 2, ',');
 	c = ft_split(dt->ceiling + 2, ',');
 	free(line);
 	if (arr_len(f) != 3 || arr_len(c) != 3)
@@ -100,6 +132,7 @@ static void	data_arg_type(char *check_str, t_game *game, int i)
 		game->map->data->ceiling = game->map->data->data[i];
 	else
 		ft_exit(1, "Invalid map data", game);
+	printf("%s\n", game->map->data->data[i]);
 }
 
 void	data_args_control(t_game *game)
