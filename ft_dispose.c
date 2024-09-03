@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:28:10 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/03 14:26:12 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:15:54 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,38 @@ void	ft_dispose_map(t_game *game)
 	if (game->map)
 	{
 		i = -1;
-		while (++i < game->map->height)
+		if (!game->map->map)
+			return ;
+		while (game->map->map[++i])
 			free(game->map->map[i]);
 		free(game->map->map);
 		i = -1;
-		while (++i < 7)
-			free(game->map->data->data[i]);
-		free(game->map->data->data);
+		if (game->map->data)
+		{
+			if (game->map->data->data)
+			{
+				while (++i < 7)
+					free(game->map->data->data[i]);
+				free(game->map->data->data);
+			}
+			free(game->map->data);
+		}
+		if (game->map->map_copy)
+		{
+			i = -1;
+			while (game->map->map_copy[++i])
+				free(game->map->map_copy[i]);
+			free(game->map->map_copy);
+		}
+		if (game->map->ff_map)
+		{
+			i = -1;
+			while (game->map->ff_map[++i])
+				free(game->map->ff_map[i]);
+			free(game->map->ff_map);
+		}
+		free(game->map);
 	}
-	if (game->map->map_copy)
-	{
-		i = -1;
-		while (++i < game->map->height + game->map->data->data_height)
-			free(game->map->map_copy[i]);
-		free(game->map->map_copy);
-	}
-	if (game->map->ff_map)
-	{
-		i = -1;
-		while (++i < game->map->height)
-			free(game->map->ff_map[i]);
-		free(game->map->ff_map);
-	}
-	free(game->map);
 }
 
 void	ft_dispose(t_game *game)
@@ -79,7 +88,7 @@ void	ft_dispose(t_game *game)
 void	ft_exit(int err_no, char *err, t_game *game)
 {
 	ft_dispose(game);
-	if(game)
+	if (game)
 		free(game);
 	system("leaks cub3d");
 	if (err_no == _SUCC_EXIT || err_no == _FINISH_GAME)

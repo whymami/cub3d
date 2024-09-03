@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:56:44 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/03 14:13:49 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:13:28 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,15 @@ void	free_arr(char **arr)
 	int	i;
 
 	i = -1;
-	while (arr[++i])
-		free(arr[i]);
-	free(arr);
+	if (arr)
+	{
+		if (*arr)
+		{
+			while (arr[++i])
+				free(arr[i]);
+		}
+		free(arr);
+	}
 }
 
 static void	rgb_control(t_game *game)
@@ -42,7 +48,7 @@ static void	rgb_control(t_game *game)
 	t_mapdata	*dt;
 
 	dt = game->map->data;
-	f = ft_split(dt->floor + 2, ',');
+	f = ft_split(dt->floor + 2, ','); // trim
 	c = ft_split(dt->ceiling + 2, ',');
 	if (arr_len(f) != 3 || arr_len(c) != 3)
 		ft_exit(1, "Invalid rgb values", game);
@@ -107,6 +113,6 @@ void	data_args_control(t_game *game)
 	i = -1;
 	while (game->map->data->data[++i])
 		if (ft_len_not_nl(game->map->data->data[i]))
-			data_arg_type(game->map->data->data[i], game, i);
+			data_arg_type(game->map->data->data[i], game, i);	
 	data_control(game);
 }

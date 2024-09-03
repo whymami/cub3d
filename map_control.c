@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_control.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 23:00:23 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/02 23:02:38 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/03 15:58:07 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,7 @@ void	map_control(t_game *game)
 				player_dir(game, x, y, game->map->map[y][x]);
 		}
 	}
+	if (game->player->dir_count < 1)
+		ft_exit(2, "player not found", game);
 	frame_control(game);
 }
