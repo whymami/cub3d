@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:59:09 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/03 16:04:43 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:19:06 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,20 @@ int	arr_len(char **arr)
 	while (arr[i])
 		i++;
 	return (i);
+}
+
+void	free_arr(char **arr)
+{
+	int	i;
+
+	i = -1;
+	if (arr)
+	{
+		if (*arr)
+		{
+			while (arr[++i])
+				free(arr[i]);
+		}
+		free(arr);
+	}
 }

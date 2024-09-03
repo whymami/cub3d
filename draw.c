@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 13:49:38 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/02 16:32:24 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/03 16:39:50 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	draw_scene(t_game *game, int x)
 	ray->tex_pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2)
 		* ray->step;
 	y = -1;
+	printf("seeexx. %d\n", ray->draw_start);
 	while (++y <= ray->draw_start)
 		game->textures->scene_data[y * WIN_WIDTH
 			+ x] = game->map->data->ceiling_rgb;

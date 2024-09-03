@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_data_control.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:56:44 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/03 16:13:28 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:24:50 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,27 @@ static void	floor_ceil_control(char *str, t_game *game)
 		ft_exit(1, "Invalid rgb value", game);
 }
 
-void	free_arr(char **arr)
-{
-	int	i;
-
-	i = -1;
-	if (arr)
-	{
-		if (*arr)
-		{
-			while (arr[++i])
-				free(arr[i]);
-		}
-		free(arr);
-	}
-}
-
 static void	rgb_control(t_game *game)
 {
 	char		**f;
 	char		**c;
 	int			i;
 	t_mapdata	*dt;
+	char		*line;
 
 	dt = game->map->data;
-	f = ft_split(dt->floor + 2, ','); // trim
+	if(!dt->floor || !dt->ceiling)
+		ft_exit(1, "Invalid floor or ceiling color", game);
+	line = ft_strtrim(dt->floor, " ");
+	if (!line)
+		ft_exit(1, "Invalid floor color", game);
+	f = ft_split(line + 2, ',');
+	free(line);
+	line = ft_strtrim(dt->floor, " ");
+	if (!line)
+		ft_exit(1, "Invalid floor color", game);
 	c = ft_split(dt->ceiling + 2, ',');
+	free(line);
 	if (arr_len(f) != 3 || arr_len(c) != 3)
 		ft_exit(1, "Invalid rgb values", game);
 	i = -1;
@@ -90,6 +85,7 @@ static void	data_control(t_game *game)
 
 static void	data_arg_type(char *check_str, t_game *game, int i)
 {
+
 	if (ft_strncmp(check_str, "NO", 2) == 0)
 		game->map->data->no = game->map->data->data[i];
 	else if (ft_strncmp(check_str, "SO", 2) == 0)
@@ -113,6 +109,6 @@ void	data_args_control(t_game *game)
 	i = -1;
 	while (game->map->data->data[++i])
 		if (ft_len_not_nl(game->map->data->data[i]))
-			data_arg_type(game->map->data->data[i], game, i);	
+			data_arg_type(game->map->data->data[i], game, i);
 	data_control(game);
 }
