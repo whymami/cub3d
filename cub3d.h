@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:25:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/02 22:37:44 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/03 13:16:47 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,4 +184,8 @@ void			set_texture_coordinate(t_game *game);
 void			set_wall_coordinate(t_game *game);
 void			player_start_dir(t_game *game);
 void			raycasting(t_game *game);
+void			map_control(t_game *game);
+void			data_copy(t_game *game);
+void			update_data_height(t_game *game);
+void			player_dir(t_game *game, int x, int y, char dir);
 #endif

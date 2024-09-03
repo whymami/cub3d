@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 12:01:26 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/02 22:44:24 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/03 13:21:59 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	key_hook(void *param)
 		move_player(game, (game->player->dir_y * MOVE_SPEED),
 			-(game->player->dir_x * MOVE_SPEED));
 	if (game->move->d)
-		move_player(game, game->player->dir_y * MOVE_SPEED, (game->player->dir_x
+		move_player(game, -(game->player->dir_y * MOVE_SPEED), (game->player->dir_x
 				* MOVE_SPEED));
 	if (game->move->right)
 		rotate_player(game, ROT_SPEED);
