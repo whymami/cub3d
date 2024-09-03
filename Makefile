@@ -1,4 +1,4 @@
-NAME = bin/cub3d
+NAME = cub3d
 
 LIB_DIR = lib
 LIBFT_DIR = lib/libft
@@ -16,7 +16,7 @@ SRC = main.c map.c path_control.c utils.c map_utils.c map_data_control.c \
 OBJ_DIR = obj
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g#-g -fsanitize=address
 CC = gcc
 
 $(shell mkdir -p bin $(OBJ_DIR) )

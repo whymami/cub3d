@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dispose.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:28:10 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/03 13:44:13 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/03 14:26:12 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ void	ft_dispose(t_game *game)
 void	ft_exit(int err_no, char *err, t_game *game)
 {
 	ft_dispose(game);
-	system("leaks cub3D");
+	if(game)
+		free(game);
+	system("leaks cub3d");
 	if (err_no == _SUCC_EXIT || err_no == _FINISH_GAME)
 	{
 		ft_putstr_fd(err, 2);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_initialize.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 12:01:26 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/03 13:21:59 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/03 14:08:01 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ void	mlx_initialize(t_game *game)
 	create_scene(game);
 	init_ray(game);
 	game->move = ft_calloc(1, sizeof(t_move));
+	if (!game->move)
+		ft_exit(1, "malloc move error", game);
 	game->player->boost = 1;
 	mlx_hook(game->win, 2, 0, key_press, game);
 	mlx_hook(game->win, 3, 0, key_release, game);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_data_control.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:56:44 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/02 22:43:08 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/03 14:13:49 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@ static void	floor_ceil_control(char *str, t_game *game)
 	}
 	else
 		ft_exit(1, "Invalid rgb value", game);
+}
+
+void	free_arr(char **arr)
+{
+	int	i;
+
+	i = -1;
+	while (arr[++i])
+		free(arr[i]);
+	free(arr);
 }
 
 static void	rgb_control(t_game *game)
@@ -44,6 +54,8 @@ static void	rgb_control(t_game *game)
 	}
 	dt->floor_rgb = ft_atoi(f[0]) << 16 | ft_atoi(f[1]) << 8 | ft_atoi(f[2]);
 	dt->ceiling_rgb = ft_atoi(c[0]) << 16 | ft_atoi(c[1]) << 8 | ft_atoi(c[2]);
+	free_arr(f);
+	free_arr(c);
 }
 
 static void	data_control(t_game *game)
@@ -61,7 +73,11 @@ static void	data_control(t_game *game)
 		line = get_next_line(fd);
 		close(fd);
 		if (line == NULL)
+		{
+			free(line);
 			ft_exit(1, "NO Path not found\n", game);
+		}
+		free(line);
 	}
 	rgb_control(game);
 }
