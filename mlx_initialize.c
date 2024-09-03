@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_initialize.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 12:01:26 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/03 21:10:29 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/09/03 23:12:19 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ int	key_hook(void *param)
 		move_player(game, -(game->player->dir_y * MOVE_SPEED),
 			(game->player->dir_x * MOVE_SPEED));
 	if (game->move->d)
-		move_player(game, (game->player->dir_y * MOVE_SPEED), -(game->player->dir_x
-				* MOVE_SPEED));
+		move_player(game, (game->player->dir_y * MOVE_SPEED),
+			-(game->player->dir_x * MOVE_SPEED));
 	if (game->move->right)
 		rotate_player(game, -ROT_SPEED);
 	if (game->move->left)

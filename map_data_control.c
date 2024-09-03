@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:56:44 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/03 23:05:54 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/03 23:26:13 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,45 +24,13 @@ static void	floor_ceil_control(char *str, t_game *game)
 		ft_exit(1, "Invalid rgb value", game);
 }
 
-void	free_arr(char **arr)
+static void	rgb_control_check(t_game *game, char **f, char **c)
 {
-	int	i;
-
-	i = -1;
-	if (arr)
-	{
-		if (*arr)
-		{
-			while (arr[++i])
-				free(arr[i]);
-		}
-		free(arr);
-	}
-}
-void	comma_count(char *line, t_game *game)
-{
-	int	i;
-	int	count;
-
-	i = -1;
-	count = 0;
-	while (line[++i])
-		if (line[i] == ',')
-			++count;
-	if (count > 2)
-		ft_exit(2, "comma count error", game);
-}
-
-static void	rgb_control(t_game *game)
-{
-	char		**f;
-	char		**c;
-	int			i;
 	t_mapdata	*dt;
 	char		*line;
 
 	dt = game->map->data;
-	if(!dt->floor || !dt->ceiling)
+	if (!dt->floor || !dt->ceiling)
 		ft_exit(1, "Invalid floor or ceiling color", game);
 	line = ft_strtrim(dt->floor, " ");
 	if (!line)
@@ -79,6 +47,15 @@ static void	rgb_control(t_game *game)
 	free(line);
 	if (arr_len(f) != 3 || arr_len(c) != 3)
 		ft_exit(1, "Invalid rgb values", game);
+}
+
+static void	rgb_control(t_game *game)
+{
+	char		**f;
+	char		**c;
+	t_mapdata	*dt;
+	int			i;
+
 	i = -1;
 	while (++i < 3)
 	{
@@ -117,7 +94,6 @@ static void	data_control(t_game *game)
 
 static void	data_arg_type(char *check_str, t_game *game, int i)
 {
-
 	if (ft_strncmp(check_str, "NO", 2) == 0)
 		game->map->data->no = game->map->data->data[i];
 	else if (ft_strncmp(check_str, "SO", 2) == 0)
@@ -132,7 +108,6 @@ static void	data_arg_type(char *check_str, t_game *game, int i)
 		game->map->data->ceiling = game->map->data->data[i];
 	else
 		ft_exit(1, "Invalid map data", game);
-	printf("%s\n", game->map->data->data[i]);
 }
 
 void	data_args_control(t_game *game)

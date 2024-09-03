@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:25:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/03 22:58:21 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/03 23:16:48 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ typedef struct s_ray
 	int			color;
 	double		wall_x;
 	double		step;
-	double		cameraX;
+	double		camera_x;
 }				t_ray;
 
 typedef struct s_move
@@ -189,4 +189,5 @@ void			data_copy(t_game *game);
 void			update_data_height(t_game *game);
 void			player_dir(t_game *game, int x, int y, char dir);
 void			free_arr(char **arr);
+void			comma_count(char *line, t_game *game);
 #endif

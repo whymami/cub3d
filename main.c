@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:27:07 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/03 19:59:39 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/09/03 23:11:59 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 		ft_exit(1, "Invalid number of arguments", NULL);
 }
 
-// void __attribute__((destructor)) a()
-// {
-// 	system("leaks cub3d");
-// }
+void	__attribute__ ((destructor))	a ()
+{
+	system("leaks cub3d");
+}

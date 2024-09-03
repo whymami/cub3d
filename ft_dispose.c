@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:28:10 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/03 22:59:18 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/03 23:21:35 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,37 @@ void	ft_dispose_texture(t_game *game)
 	}
 }
 
+void	ft_dispose_data_map(t_game *game)
+{
+	int	i;
+
+	i = -1;
+	if (game->map->map)
+	{
+		while (game->map->map[++i])
+			free(game->map->map[i]);
+		free(game->map->map);
+	}
+	i = -1;
+	if (game->map->data)
+	{
+		if (game->map->data->data)
+		{
+			while (++i < 7)
+				if (game->map->data->data[i])
+					free(game->map->data->data[i]);
+			free(game->map->data->data);
+		}
+		free(game->map->data);
+	}
+}
+
 void	ft_dispose_map(t_game *game)
 {
 	int	i;
 
 	if (game->map)
 	{
-		i = -1;
-		if (game->map->map)
-		{
-			while (game->map->map[++i])
-				free(game->map->map[i]);
-			free(game->map->map);
-		}
-		i = -1;
-		if (game->map->data)
-		{
-			if (game->map->data->data)
-			{
-				while (++i < 7)
-					if (game->map->data->data[i])
-						free(game->map->data->data[i]);
-				free(game->map->data->data);
-			}
-			free(game->map->data);
-		}
 		if (game->map->map_copy)
 		{
 			i = 0;
@@ -75,8 +81,8 @@ void	ft_dispose_map(t_game *game)
 
 void	ft_dispose(t_game *game)
 {
-	if(!game)
-		return;
+	if (!game)
+		return ;
 	if (game->player)
 		free(game->player);
 	if (game->ray)
@@ -94,7 +100,7 @@ void	ft_exit(int err_no, char *err, t_game *game)
 	if (game)
 	{
 		ft_dispose(game);
-			free(game);
+		free(game);
 	}
 	system("leaks cub3d");
 	if (err_no == _SUCC_EXIT || err_no == _FINISH_GAME)
