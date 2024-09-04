@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 14:37:03 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/04 14:38:44 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/04 14:40:08 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ static void	rgb_control_check(t_game *game, char ***f, char ***c)
 
 void	rgb_control(t_game *game)
 {
-	char        **f;
-	char        **c;
-	t_mapdata   *dt;
-	int i;
+	char		**f;
+	char		**c;
+	t_mapdata	*dt;
+	int			i;
 
 	i = -1;
-	rgb_control_check(game, &f, &c);
+	rgb_control_check (game, &f, &c);
 	dt = game->map->data;
 	while (++i < 3)
 	{
