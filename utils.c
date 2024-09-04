@@ -6,7 +6,7 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:59:09 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/03 23:13:25 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/04 14:35:24 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,8 @@ void	free_arr(char **arr)
 	if (arr)
 	{
 		if (*arr)
-		{
 			while (arr[++i])
 				free(arr[i]);
-		}
 		free(arr);
 	}
 }

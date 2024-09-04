@@ -6,67 +6,11 @@
 /*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:56:44 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/03 23:26:13 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/04 14:37:36 by btanir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	floor_ceil_control(char *str, t_game *game)
-{
-	if (ft_str_digit(str))
-	{
-		if (ft_atoi(str) < 0 || ft_atoi(str) > 255)
-			ft_exit(1, "rgb value cannot be less than 0 or greater than 255",
-				game);
-	}
-	else
-		ft_exit(1, "Invalid rgb value", game);
-}
-
-static void	rgb_control_check(t_game *game, char **f, char **c)
-{
-	t_mapdata	*dt;
-	char		*line;
-
-	dt = game->map->data;
-	if (!dt->floor || !dt->ceiling)
-		ft_exit(1, "Invalid floor or ceiling color", game);
-	line = ft_strtrim(dt->floor, " ");
-	if (!line)
-		ft_exit(1, "Invalid floor color", game);
-	f = ft_split(line + 2, ',');
-	free(line);
-	line = ft_strtrim(dt->floor, " ");
-	if (!line)
-		ft_exit(1, "Invalid floor color", game);
-	comma_count(dt->ceiling, game);
-	comma_count(dt->floor, game);
-	f = ft_split(dt->floor + 2, ',');
-	c = ft_split(dt->ceiling + 2, ',');
-	free(line);
-	if (arr_len(f) != 3 || arr_len(c) != 3)
-		ft_exit(1, "Invalid rgb values", game);
-}
-
-static void	rgb_control(t_game *game)
-{
-	char		**f;
-	char		**c;
-	t_mapdata	*dt;
-	int			i;
-
-	i = -1;
-	while (++i < 3)
-	{
-		floor_ceil_control(f[i], game);
-		floor_ceil_control(c[i], game);
-	}
-	dt->floor_rgb = ft_atoi(f[0]) << 16 | ft_atoi(f[1]) << 8 | ft_atoi(f[2]);
-	dt->ceiling_rgb = ft_atoi(c[0]) << 16 | ft_atoi(c[1]) << 8 | ft_atoi(c[2]);
-	free_arr(f);
-	free_arr(c);
-}
 
 static void	data_control(t_game *game)
 {
