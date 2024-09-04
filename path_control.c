@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_control.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:14:09 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/03 16:25:13 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/04 16:22:28 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

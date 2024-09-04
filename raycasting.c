@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 12:27:44 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/03 23:07:10 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/04 16:22:30 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	calculate_ray_steps(t_game *game, int map_x, int map_y)
 	}
 }
 
-static void	perform_dda(t_game *game, int *mapX, int *mapY)
+static void	perform_dda(t_game *game, int *map_x, int *map_y)
 {
 	game->ray->hit = 0;
 	while (game->ray->hit == 0)
@@ -59,27 +59,27 @@ static void	perform_dda(t_game *game, int *mapX, int *mapY)
 		if (game->ray->side_dist_x < game->ray->side_dist_y)
 		{
 			game->ray->side_dist_x += game->ray->delta_dist_x;
-			*mapX += game->ray->step_x;
+			*map_x += game->ray->step_x;
 			game->ray->side = 0;
 		}
 		else
 		{
 			game->ray->side_dist_y += game->ray->delta_dist_y;
-			*mapY += game->ray->step_y;
+			*map_y += game->ray->step_y;
 			game->ray->side = 1;
 		}
-		if (game->map->map[*mapX][*mapY] == '1')
+		if (game->map->map[*map_x][*map_y] == '1')
 			game->ray->hit = 1;
 	}
 }
 
-static void	calculate_wall_height(t_game *game, int mapX, int mapY)
+static void	calculate_wall_height(t_game *game, int map_x, int map_y)
 {
 	if (game->ray->side == 0)
-		game->ray->perp_wall_dist = (mapX - game->player->player_x + (1
+		game->ray->perp_wall_dist = (map_x - game->player->player_x + (1
 					- game->ray->step_x) / 2) / game->ray->ray_dir_x;
 	else
-		game->ray->perp_wall_dist = (mapY - game->player->player_y + (1
+		game->ray->perp_wall_dist = (map_y - game->player->player_y + (1
 					- game->ray->step_y) / 2) / game->ray->ray_dir_y;
 	game->ray->line_height = (int)(WIN_HEIGHT / game->ray->perp_wall_dist);
 	game->ray->draw_start = -game->ray->line_height / 2 + WIN_HEIGHT / 2;

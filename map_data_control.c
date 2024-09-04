@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_data_control.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 17:56:44 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/04 14:37:36 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/04 16:22:19 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,19 @@ static void	data_control(t_game *game)
 
 static void	data_arg_type(char *check_str, t_game *game, int i)
 {
-	if (ft_strncmp(check_str, "NO", 2) == 0)
+	if (game->map->data->no == NULL && ft_strncmp(check_str, "NO", 2) == 0)
 		game->map->data->no = game->map->data->data[i];
-	else if (ft_strncmp(check_str, "SO", 2) == 0)
+	else if (game->map->data->so == NULL && ft_strncmp(check_str, "SO", 2) == 0)
 		game->map->data->so = game->map->data->data[i];
-	else if (ft_strncmp(check_str, "WE", 2) == 0)
+	else if (game->map->data->we == NULL && ft_strncmp(check_str, "WE", 2) == 0)
 		game->map->data->we = game->map->data->data[i];
-	else if (ft_strncmp(check_str, "EA", 2) == 0)
+	else if (game->map->data->ea == NULL && ft_strncmp(check_str, "EA", 2) == 0)
 		game->map->data->ea = game->map->data->data[i];
-	else if (ft_strncmp(check_str, "F", 1) == 0)
+	else if (game->map->data->floor == NULL && ft_strncmp(check_str, "F",
+			1) == 0)
 		game->map->data->floor = game->map->data->data[i];
-	else if (ft_strncmp(check_str, "C", 1) == 0)
+	else if (game->map->data->ceiling == NULL && ft_strncmp(check_str, "C",
+			1) == 0)
 		game->map->data->ceiling = game->map->data->data[i];
 	else
 		ft_exit(1, "Invalid map data", game);

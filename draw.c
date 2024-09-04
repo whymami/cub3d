@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 13:49:38 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/03 23:07:47 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/04 16:22:05 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@ void	create_scene(t_game *game)
 
 	tex = game->textures;
 	tex->scene = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!tex->scene)
+		ft_exit(2, "tex->scene", game);
 	tex->scene_data = (int *)mlx_get_data_addr(tex->scene, &tex->bits_per_pixel,
 			&tex->size_line, &tex->endian);
+	if (!tex->scene_data)
+		ft_exit(2, "tex->scene_data", game);
 	game->textures = tex;
 }
 

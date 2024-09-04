@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = bin/cub3D
 
 LIB_DIR = lib
 LIBFT_DIR = lib/libft
@@ -11,17 +11,17 @@ LDFLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 SRC = main.c map.c path_control.c utils.c map_utils.c map_data_control.c \
 		mlx_initialize.c raycasting.c draw.c movement.c texture.c \
 		set_ray_coordinate.c init_ray.c map_copy.c map_control.c \
-		ft_dispose.c rgb.c
+		ft_dispose.c rgb.c map_devided_h.c
 
 OBJ_DIR = obj
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 CC = gcc
 
 $(shell mkdir -p bin $(OBJ_DIR) )
 
-all: $(NAME) run
+all: $(NAME)
 
 $(NAME): $(MLX) $(OBJ) $(LIBFT) 
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LDFLAGS) -o $(NAME)
@@ -50,6 +50,4 @@ fclean: clean
 
 re: fclean all
 
-run:
-	@./$(NAME) maps/sa.cub
 .PHONY: all clean fclean re

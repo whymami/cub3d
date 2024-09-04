@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:25:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/09/04 14:37:20 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/04 16:21:59 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # define _CUB_ERR "Invalid file extension. File must be a .cub file"
 
 # define _SUCC_EXIT 0
-# define _FINISH_GAME 1
 
 # define WIN_HEIGHT 720
 # define WIN_WIDTH 1280
@@ -53,6 +52,7 @@
 # define KEY_D 2
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
+# define KEY_X 17
 # define SHIFT 257
 
 typedef struct s_texture
@@ -164,7 +164,6 @@ void			map(char *path);
 int				ft_len_not_nl(char *str);
 char			**my_realloc_arr(char **ptr, size_t size);
 void			free_map(char **map, int y);
-
 void			map_init(t_game *game, int y);
 void			copy_map(t_game *game, char *path);
 void			parse_copymap(t_game *game);
@@ -172,6 +171,7 @@ void			data_args_control(t_game *game);
 int				get_map_height(char *path);
 int				ft_str_digit(char *str);
 int				arr_len(char **arr);
+void			map_devided_h(t_game *game);
 void			mlx_initialize(t_game *game);
 void			move_player(t_game *game, double next_x, double next_y);
 void			rotate_player(t_game *game, double rot_speed);

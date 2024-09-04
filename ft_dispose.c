@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dispose.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:28:10 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/03 23:21:35 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/04 16:22:09 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	ft_dispose_map(t_game *game)
 				free(game->map->map_copy[i++]);
 			free(game->map->map_copy);
 		}
+		ft_dispose_data_map(game);
 		if (game->map->ff_map)
 		{
 			i = -1;
@@ -102,15 +103,12 @@ void	ft_exit(int err_no, char *err, t_game *game)
 		ft_dispose(game);
 		free(game);
 	}
-	system("leaks cub3d");
-	if (err_no == _SUCC_EXIT || err_no == _FINISH_GAME)
+	if (err_no == _SUCC_EXIT)
 	{
-		ft_putstr_fd(err, 2);
+		ft_putstr_fd(err, 1);
 		exit(0);
 	}
-	ft_putstr_fd("ERROR: Excited With (", 2);
-	ft_putnbr_fd(err_no, 2);
-	ft_putstr_fd("): ", 2);
+	ft_putendl_fd("error", 2);
 	ft_putendl_fd(err, 2);
 	exit(err_no);
 }

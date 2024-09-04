@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_initialize.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btanir <btanir@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 12:01:26 by btanir            #+#    #+#             */
-/*   Updated: 2024/09/03 23:12:19 by btanir           ###   ########.fr       */
+/*   Updated: 2024/09/04 16:22:25 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	key_press(int keycode, void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	if (keycode == KEY_ESC)
+	if (keycode == KEY_ESC || keycode == KEY_X)
 		ft_exit(_SUCC_EXIT, "EXIT_GAME", game);
 	else if (keycode == KEY_W)
 		game->move->w = 1;
@@ -91,6 +91,12 @@ int	key_hook(void *param)
 	return (0);
 }
 
+int	game_exit(t_game *game)
+{
+	ft_exit(0, "exit success", game);
+	return (0);
+}
+
 void	mlx_initialize(t_game *game)
 {
 	game->mlx = mlx_init();
@@ -109,6 +115,7 @@ void	mlx_initialize(t_game *game)
 	game->player->boost = 1;
 	mlx_hook(game->win, 2, 0, key_press, game);
 	mlx_hook(game->win, 3, 0, key_release, game);
+	mlx_hook(game->win, 17, 0, game_exit, game);
 	mlx_loop_hook(game->mlx, key_hook, game);
 	mlx_loop(game->mlx);
 }
